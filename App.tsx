@@ -11,7 +11,8 @@ import {
   PieChart,
   ArrowDown,
   ArrowUp,
-  Tags
+  Tags,
+  Edit
 } from 'lucide-react';
 import { Transaction, TransactionType, DailyStats, ChartDataPoint, CategoryData } from './types';
 import TransactionChart from './components/TransactionChart';
@@ -259,10 +260,20 @@ function App() {
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center justify-between">
+          {/* Budget Card - Clickable for editing */}
+          <div 
+            onClick={() => {
+              setTempBudgetInput(monthlyBudget.toString());
+              setIsBudgetModalOpen(true);
+            }}
+            className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center justify-between cursor-pointer hover:shadow-md transition-all group"
+          >
             <div>
-              <p className="text-xs text-slate-500 font-medium uppercase">月度预算</p>
-              <p className="text-2xl font-bold text-slate-700 mt-1">{formatCurrency(monthlyBudget)}</p>
+              <div className="flex items-center gap-2 mb-1">
+                <p className="text-xs text-slate-500 font-medium uppercase">月度预算</p>
+                <Edit className="w-3 h-3 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <p className="text-2xl font-bold text-slate-700">{formatCurrency(monthlyBudget)}</p>
             </div>
              <div className="h-10 w-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-500">
               <PieChart className="w-5 h-5" />
